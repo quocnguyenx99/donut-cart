@@ -1,6 +1,6 @@
 import { ReactElement, createContext, useMemo, useReducer } from "react";
 
-type CartItemType = {
+export type CartItemType = {
   sku: string;
   name: string;
   price: number;
@@ -33,7 +33,7 @@ const reducer = (
 ): CartStateType => {
   switch (action.type) {
     case REDUCER_ACTION_TYPE.ADD: {
-      if (action.payload) {
+      if (!action.payload) {
         throw new Error("action.payload missing in ADD action.");
       }
       const { sku, name, price } = action.payload;
@@ -51,7 +51,7 @@ const reducer = (
     }
 
     case REDUCER_ACTION_TYPE.REMOVE: {
-      if (action.payload) {
+      if (!action.payload) {
         throw new Error("action.payload missing in REMOVE action.");
       }
       const { sku } = action.payload;
@@ -64,10 +64,10 @@ const reducer = (
       };
     }
     case REDUCER_ACTION_TYPE.QUANTITY: {
-      if (action.payload) {
+      if (!action.payload) {
         throw new Error("action.payload missing in QUANTITY action.");
       }
-      const { sku, name, price, qty } = action.payload;
+      const { sku, qty } = action.payload;
       const filteredCart: CartItemType[] = state.cart.filter(
         (item) => item.sku !== sku
       );
@@ -139,4 +139,4 @@ export const CartProvider = ({ children }: ChildrenType): ReactElement => {
   );
 };
 
-export default CartContext
+export default CartContext;

@@ -263,11 +263,11 @@ img {
   }
 }
 
-@media only screen and (min-width: 1024px) and (max-width: 1365px) {
+@media only screen and (min-width: 1024px) {
   .cart {
     max-width: 100%;
     margin: 0;
-    grid-template-columns: 1fr max(300px);
+    grid-template-columns: auto auto;
 
     &-item {
       &__body-detail img {
